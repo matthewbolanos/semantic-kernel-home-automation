@@ -1,0 +1,10 @@
+appsettings.json
+bin
+obj
+*.ini
+*.cache
+*.log
+*.tmp
+
+# appsettings.json
+appsettings.Development.json
