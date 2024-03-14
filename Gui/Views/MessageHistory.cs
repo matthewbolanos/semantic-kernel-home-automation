@@ -39,7 +39,6 @@ public class MessageHistory
 		Message message = new Message(_renderedView, input, sender, DateTime.Now, _scrollHeight);
 		Messages.Add(message);
 		_scrollHeight = _scrollHeight + message.Height;
-
 		GetNewContentHeight();
 	}
 

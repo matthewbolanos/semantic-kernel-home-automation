@@ -15,14 +15,14 @@ using System;
 
 namespace SKSampleCatalog.Scenarios
 {
-    [ScenarioMetadata(Name: "Dynamic plugins", Description: "Shows how give the AI plugins to dynamically call.", OrderPriority: 1)]
-    public class ChatWithDynamicPlugins : Scenario
+    [ScenarioMetadata(Name: "Home Automation", Description: "Shows how to ask the AI to perform multiple tasks with plugins.", OrderPriority: 1)]
+    public class HomeAutomation : Scenario
     {
         private ChatView chatView;
 
         public override async Task Run()
         {
-            // Get the Hue Bridge configuration
+            // Get the appsettings configuration
             HostApplicationBuilder builder = Host.CreateApplicationBuilder();
             builder.Services.Configure<HueBridgeOptions>(builder.Configuration.GetSection("HueBridgeOptions"));
             builder.Services.Configure<BingSearchOptions>(builder.Configuration.GetSection("BingSearchOptions"));
@@ -59,11 +59,11 @@ namespace SKSampleCatalog.Scenarios
             );
 
             // Add the plugins
-            kernelBuilder.Plugins.AddFromType<HueLights>();
-            kernelBuilder.Plugins.AddFromType<Bing>();
             kernelBuilder.Plugins.AddFromFunctions("DateTimeHelpers",
                 [KernelFunctionFactory.CreateFromMethod(() => $"{DateTime.UtcNow:r}", "Now", "Gets the current date and time")]
             );
+            kernelBuilder.Plugins.AddFromType<Bing>();
+            kernelBuilder.Plugins.AddFromType<HueLights>();
 
             // Build the kernel and retrieve the AI services
             Kernel kernel = kernelBuilder.Build();
@@ -80,7 +80,7 @@ namespace SKSampleCatalog.Scenarios
             while (true)
             {
                 // Get the user's input
-                Console.WriteLine("User > ");
+                Console.Write("You > ");
                 var input = Console.ReadLine();
                 history.AddUserMessage(input);
 

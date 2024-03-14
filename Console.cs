@@ -33,7 +33,14 @@ namespace SKSampleCatalog
             if (message.Contains(" > "))
             {
                 // Get the name of the actor sending the message
-                activeActor = message.Split('>')[0].Trim();
+                var name = message.Split('>')[0].Trim();
+
+                if (name == "You")
+                {
+                    return;
+                }
+
+                activeActor = name;
 
                 streamingOutputAction?.Invoke(null, activeActor);
                 return;

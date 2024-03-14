@@ -6,7 +6,7 @@ public class ChatView : Window
 	private Action<string> _onInput;
 	private MessageHistory _messageHistory;
 
-	public ChatView(Action<string> onInput, string title = "Semantic Kernel")
+	public ChatView(Action<string> onInput, string title = "Semantic Kernel", bool showInput = true)
 	{
 		Title = title;
 
@@ -27,9 +27,11 @@ public class ChatView : Window
 		};
 
 		// Create the input window
-		var InputField = new InputField(this, onEnter, _messageHistory.Bottom);
-
-		InputField.SetFocus();
+		if (showInput)
+		{
+			var InputField = new InputField(this, onEnter, _messageHistory.Bottom);
+			InputField.SetFocus();
+		}
 	}
 
 	public void AddResponse(string reply, string name = "Bot")

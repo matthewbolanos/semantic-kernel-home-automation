@@ -30,7 +30,7 @@ namespace SKSampleCatalog
 			// Run the first scenario
 			if (_scenarios.Count > 0)
 			{
-				_selectedScenario = (Scenario)Activator.CreateInstance(_scenarios.First().GetType());
+				_selectedScenario = (Scenario)Activator.CreateInstance(_scenarios[1].GetType());
 				Application.UseSystemConsole = _useSystemConsole;
 				Application.Init();
 				_selectedScenario.Init(null);
