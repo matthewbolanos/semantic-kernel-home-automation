@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Terminal.Gui;
 using Microsoft.SemanticKernel.TextToAudio;
 using Options;
+using System;
 
 
 namespace SKSampleCatalog.Scenarios
@@ -35,7 +36,7 @@ namespace SKSampleCatalog.Scenarios
 
             // Option 1: Use a chat completion model from OpenAI
             kernelBuilder.AddOpenAIChatCompletion(
-                modelId: "[Your chat completion model]",
+                modelId: "gpt-4",
                 apiKey: "[Your OpenAI API key]"
             );
             kernelBuilder.AddOpenAITextToAudio(
@@ -60,6 +61,9 @@ namespace SKSampleCatalog.Scenarios
             // Add the plugins
             kernelBuilder.Plugins.AddFromType<HueLights>();
             kernelBuilder.Plugins.AddFromType<Bing>();
+            kernelBuilder.Plugins.AddFromFunctions("DateTimeHelpers",
+                [KernelFunctionFactory.CreateFromMethod(() => $"{DateTime.UtcNow:r}", "Now", "Gets the current date and time")]
+            );
 
             // Build the kernel and retrieve the AI services
             Kernel kernel = kernelBuilder.Build();

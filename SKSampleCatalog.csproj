@@ -2,7 +2,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
-    <LangVersion>11.0</LangVersion>
+    <LangVersion>12.0</LangVersion>
     <StartupObject>SKSampleCatalog.SKSampleCatalogApp</StartupObject>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     <!-- Version numbers are automatically updated by gitversion when a release is released -->
